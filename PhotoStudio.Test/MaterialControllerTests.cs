@@ -190,21 +190,22 @@ namespace PhotoStudio.Test
         //    result.Should().BeOfType<OkResult>();
         //}
 
-        //[Fact]
-        //public async void GetMaterialByName_ReturnMaterials()
-        //{
-        //    //arrange
-        //    string name = "p";
-        //    var expectedMaterials = BuilderUtils.BuildListMaterialDto().Where(m => m.MaterialName.Contains(name, StringComparison.InvariantCultureIgnoreCase)).ToList();
-        //    MaterialFixture.MockMaterialManager.Setup(mock => mock.GetMaterialByTextName(It.IsAny<string>())).ReturnsAsync(() => expectedMaterials);
+        [Fact]
+        [Trait("UI", "Back")]
+        public async void GetMaterialByName_ReturnMaterials()
+        {
+            //arrange
+            string name = "p";
+            var expectedMaterials = BuilderUtils.BuildListMaterialDto().Where(m => m.MaterialName.Contains(name, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            MaterialFixture.MockMaterialManager.Setup(mock => mock.GetMaterialByTextName(It.IsAny<string>())).ReturnsAsync(() => expectedMaterials);
 
-        //    //actions
-        //    var result = await MaterialFixture.MaterialController.GetMaterialsWithName(name);
+            //actions
+            var result = await MaterialFixture.MaterialController.GetMaterialsWithName(name);
 
-        //    //asserts
-        //    var materials = (result as OkObjectResult)?.Value;
-        //    materials.Should().BeEquivalentTo(expectedMaterials);
-        //}       
+            //asserts
+            var materials = (result as OkObjectResult)?.Value;
+            materials.Should().BeEquivalentTo(expectedMaterials);
+        }
 
     }    
 }

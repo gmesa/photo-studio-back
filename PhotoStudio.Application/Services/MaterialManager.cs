@@ -18,6 +18,8 @@ namespace PhotoStudio.Application.Services
         Task DeleteMaterial(int id);
         Task<List<MaterialDTO>> GetMaterials();
         Task<MaterialDTO> GetMaterialById(int id);
+        Task<List<MaterialDTO>> GetMaterialByTextName(string name);
+
     }
 
     public class MaterialManager : IMaterialManager
@@ -89,8 +91,15 @@ namespace PhotoStudio.Application.Services
 
             return materialDTO;
 
-        }       
-      
+        }
+
+        public async Task<List<MaterialDTO>> GetMaterialByTextName(string name)
+        {
+            var material = await _qMaterialRepository.Find(m => m.MaterialName.Contains(name)).ToListAsync();
+            
+            return _mapper.Map<List<MaterialDTO>>(material);
+        }
+
     }
 
 

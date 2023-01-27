@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoStudio.Infrastructure.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoStudio.Infrastructure.Data", "PhotoStudio.Infrastructure.Data\PhotoStudio.Infrastructure.Data.csproj", "{1E1CE3E8-25BD-4C6E-B206-1AD2B31C02C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoStudio.ServicesDTO", "PhotoStudio.ServicesDTO\PhotoStudio.ServicesDTO.csproj", "{AF8FEAEB-B609-49F7-B840-FE08BD3AF0D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoStudio.ServicesDTO", "PhotoStudio.ServicesDTO\PhotoStudio.ServicesDTO.csproj", "{AF8FEAEB-B609-49F7-B840-FE08BD3AF0D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoStudio.Test", "PhotoStudio.Test\PhotoStudio.Test.csproj", "{BE931B1B-4F0E-44C9-AC8D-08730E9CE011}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{AF8FEAEB-B609-49F7-B840-FE08BD3AF0D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF8FEAEB-B609-49F7-B840-FE08BD3AF0D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF8FEAEB-B609-49F7-B840-FE08BD3AF0D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE931B1B-4F0E-44C9-AC8D-08730E9CE011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE931B1B-4F0E-44C9-AC8D-08730E9CE011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE931B1B-4F0E-44C9-AC8D-08730E9CE011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE931B1B-4F0E-44C9-AC8D-08730E9CE011}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

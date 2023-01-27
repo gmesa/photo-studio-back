@@ -18,8 +18,6 @@ using PhotoStudio.WebApi.Extensions;
 using PhotoStudio.WebApi.Middlewares;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using TG.AspNetCore.Logging;
-using TG.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
 using System.Text.Json;
@@ -123,3 +121,5 @@ app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 
 app.Run();
+
+public partial class Program { }

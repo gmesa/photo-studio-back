@@ -159,36 +159,36 @@ namespace PhotoStudio.Test
             result.Should().BeOfType<OkObjectResult>();
         }
 
-        //[Fact]
-        //[Trait("UI", "Back")]
-        //public async void UpdateMaterial_ReturnNotFound()
-        //{
-        //    //arrange
-        //    var expectedMaterials = BuilderUtils.BuildMaterialDto();
-        //    MaterialFixture.MockMaterialManager.Setup(mock => mock.UpdateMaterial(It.IsAny<MaterialDTO>(), It.IsAny<int>())).ReturnsAsync(() => null);
+        [Fact]
+        [Trait("UI", "Back")]
+        public async void UpdateMaterial_ReturnNotFound()
+        {
+            //arrange
+            var expectedMaterials = BuilderUtils.BuildMaterialDto();
+            MaterialFixture.MockMaterialManager.Setup(mock => mock.UpdateMaterial(It.IsAny<MaterialDTO>(), It.IsAny<int>())).ReturnsAsync(() => null);
 
-        //    //actions
-        //    var result = await MaterialFixture.MaterialController.UpdateMaterial(expectedMaterials, new Random().Next());
+            //actions
+            var result = await MaterialFixture.MaterialController.UpdateMaterial(expectedMaterials, new Random().Next());
 
-        //    //asserts
-        //    var material = (result as OkObjectResult)?.Value as MaterialDTO;
-        //    material.Should().BeNull();
-        //    result.Should().BeOfType<NotFoundResult>();
-        //}
+            //asserts
+            var material = (result as OkObjectResult)?.Value as MaterialDTO;
+            material.Should().BeNull();
+            result.Should().BeOfType<NotFoundResult>();
+        }
 
-        //[Fact]
-        //public async void DeleteMaterial_ReturnOk()
-        //{
-        //    //arrange
+        [Fact]
+        public async void DeleteMaterial_ReturnOk()
+        {
+            //arrange
 
-        //    MaterialFixture.MockMaterialManager.Setup(mock => mock.DeleteMaterial(It.IsAny<int>())).Verifiable();
+            MaterialFixture.MockMaterialManager.Setup(mock => mock.DeleteMaterial(It.IsAny<int>())).Verifiable();
 
-        //    //actions
-        //    var result = await MaterialFixture.MaterialController.DeleteMaterial(new Random().Next());
+            //actions
+            var result = await MaterialFixture.MaterialController.DeleteMaterial(new Random().Next());
 
-        //    //asserts
-        //    result.Should().BeOfType<OkResult>();
-        //}
+            //asserts
+            result.Should().BeOfType<OkResult>();
+        }
 
         [Fact]
         [Trait("UI", "Back")]

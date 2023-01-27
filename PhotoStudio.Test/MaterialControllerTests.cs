@@ -94,21 +94,20 @@ namespace PhotoStudio.Test
             //Assert.Equal(expected, material);
         }
 
-        //[Fact]
-        //[Trait("UI", "Back")]
-        //public async void GetMaterialById_NoMaterial_ReturnNotFound()
-        //{
-        //    //arrange
-        //    _ = MaterialFixture.MockMaterialManager.Setup(materialManager => materialManager.GetMaterialById(It.IsAny<int>())).ReturnsAsync(null as MaterialDTO);
+        [Fact]
+       public async void GetMaterialById_NoMaterial_ReturnNotFound()
+        {
+            //arrange
+            _ = MaterialFixture.MockMaterialManager.Setup(materialManager => materialManager.GetMaterialById(It.IsAny<int>())).ReturnsAsync(null as MaterialDTO);
 
 
-        //    //act 
-        //    var result = await MaterialFixture.MaterialController.GetMaterialById(0);
+            //act 
+            var result = await MaterialFixture.MaterialController.GetMaterialById(0);
 
-        //    //assert
-        //    result.Should().BeOfType<NotFoundResult>();
-        //    //Assert.IsType<NotFoundResult>(result);
-        //}
+            //assert
+            result.Should().BeOfType<NotFoundResult>();
+            //Assert.IsType<NotFoundResult>(result);
+        }
 
         //[Fact]
         //[Trait("UI", "Front")]

@@ -15,38 +15,40 @@ using System.Threading.Tasks;
 
 namespace PhotoStudio.Test
 {
-    
 
+    [Collection("Database collection")]
     public class MaterialManagerTest : IClassFixture<MaterialFixture>
     {
         private readonly ICommandRepository<Material> _cMaterialRepository;
         private readonly IQueryRepository<Material> _qMaterialRepository;
         private readonly MaterialFixture _materialFixture;
         private readonly MaterialManager _materialManager;
+        public readonly DBContextFixture _dBContextFixture;
 
 
-        public MaterialManagerTest(MaterialFixture materialFixture)
+        public MaterialManagerTest(MaterialFixture materialFixture, DBContextFixture DBContextFixture)
         {
+            _dBContextFixture = DBContextFixture;
             _materialFixture = materialFixture;
-            _qMaterialRepository = new QueryRepository<Material>(_materialFixture.PhotoStudioContext);
-            _cMaterialRepository = new CommandRepository<Material>(_materialFixture.PhotoStudioContext);            
+            _qMaterialRepository = new QueryRepository<Material>(_dBContextFixture.PhotoStudioContext);
+            _cMaterialRepository = new CommandRepository<Material>(_dBContextFixture.PhotoStudioContext);            
             _materialManager = new MaterialManager(_cMaterialRepository, _qMaterialRepository, _materialFixture.Mapper);
         }
 
 
-        //[Fact]
-        //public async void GetMaterials_ReturnAllMaterials()
-        //{
-        //    //arrange
-        //    var excpected = await _materialFixture.PhotoStudioContext.DbSet<Material>().ToListAsync();
+        [Fact]
+        public async void GetMaterials_ReturnAllMaterials()
+        {
+            //arrange
+            var excpected = await _dBContextFixture.PhotoStudioContext.DbSet<Material>().ToListAsync();
 
-        //    //act
-        //    var result = await _materialManager.GetMaterials();
+            //act
+            var result = await _materialManager.GetMaterials();
 
-        //    //assert
-        //    result.Should().BeEquivalentTo(excpected, opt => opt.ExcludingMissingMembers());
+            //assert
+            result.Should().BeEquivalentTo(excpected, opt => opt.ExcludingMissingMembers());
 
-        //}
+        }
     }
 
 }

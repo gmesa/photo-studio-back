@@ -16,32 +16,15 @@ using System.Collections;
 
 namespace PhotoStudio.Test
 {
-    public class MaterialFixture : IDisposable
+    public class DBContextFixture : IDisposable
     {
-        public Mock<ILogger<MaterialController>> Logger { get; set; }
-        public Mock<IMaterialManager> MockMaterialManager { get; set; }
-        public MaterialController MaterialController { get; set; }
         public PhotoStudioContext PhotoStudioContext { get; private set; }
-        public IMapper Mapper { get; private set; }
 
-        public MaterialFixture()
+        public DBContextFixture()
         {
-            MockMaterialManager = new Mock<IMaterialManager>();
-            Logger = new Mock<ILogger<MaterialController>>();
-            MaterialController = new MaterialController(MockMaterialManager.Object);
 
             SetContext();
-
-            var mapConfig = new MapperConfiguration(mc => mc.AddProfile(new PhotoStudioMapperConfiguration()));
-            Mapper = mapConfig.CreateMapper();
         }
-
-        public void Dispose()
-        {
-            PhotoStudioContext.Database.EnsureDeleted();
-            PhotoStudioContext.Dispose();
-        }
-
         public PhotoStudioContext SetContext()
         {
             if (PhotoStudioContext != null)
@@ -53,7 +36,7 @@ namespace PhotoStudio.Test
 
             //PhotoStudioContext.Database.EnsureCreated();
 
-            var defaultMaterials = BuilderUtils.BuildListMaterialDto().Select((m) => new Material() { Id= m.Id, MaterialName = m.MaterialName, RowVersion = new byte[2]}).ToList();
+            var defaultMaterials = BuilderUtils.BuildListMaterialDto().Select((m) => new Material() { Id = m.Id, MaterialName = m.MaterialName, RowVersion = new byte[2] }).ToList();
 
             if (PhotoStudioContext.DbSet<Material>().Count() == 0)
             {
@@ -62,22 +45,61 @@ namespace PhotoStudio.Test
             }
             return PhotoStudioContext;
         }
+        public void Dispose()
+        {
+            PhotoStudioContext.Database.EnsureDeleted();
+            PhotoStudioContext.Dispose();
+        }
     }
 
+    public class MaterialFixture : IDisposable
+    {
+        public Mock<ILogger<MaterialController>> Logger { get; set; }
+        public Mock<IMaterialManager> MockMaterialManager { get; set; }
+        public MaterialController MaterialController { get; set; }
+
+        public IMapper Mapper { get; private set; }
+
+        public MaterialFixture()
+        {
+            MockMaterialManager = new Mock<IMaterialManager>();
+            Logger = new Mock<ILogger<MaterialController>>();
+            MaterialController = new MaterialController(MockMaterialManager.Object);
+            var mapConfig = new MapperConfiguration(mc => mc.AddProfile(new PhotoStudioMapperConfiguration()));
+            Mapper = mapConfig.CreateMapper();
+        }
+
+        public void Dispose()
+        {
+
+        }
+    }
+
+    [CollectionDefinition("Database collection")]
+    public class DatabaseCollection : ICollectionFixture<DBContextFixture>
+    {
+        // This class has no code, and is never created. Its purpose is simply
+        // to be the place to apply [CollectionDefinition] and all the
+        // ICollectionFixture<> interfaces.
+    }
+
+    [Collection("Database collection")]
     public class MaterialControllerTests : IClassFixture<MaterialFixture>
-    {             
+    {
         public MaterialFixture MaterialFixture { get; set; }
+        public DBContextFixture DBContextFixture { get; set; }
 
 
-        public MaterialControllerTests(MaterialFixture materialFixture)
+        public MaterialControllerTests(MaterialFixture materialFixture, DBContextFixture dBContextFixture)
         {
             MaterialFixture = materialFixture;
+            DBContextFixture = dBContextFixture;
         }
 
 
 
         [Fact]
-       public async void GetMaterialById_ReturnMaterial()
+        public async void GetMaterialById_ReturnMaterial()
         {
             //arrange 
             var expected = BuilderUtils.BuildMaterialDto();
@@ -95,7 +117,7 @@ namespace PhotoStudio.Test
         }
 
         [Fact]
-       public async void GetMaterialById_NoMaterial_ReturnNotFound()
+        public async void GetMaterialById_NoMaterial_ReturnNotFound()
         {
             //arrange
             _ = MaterialFixture.MockMaterialManager.Setup(materialManager => materialManager.GetMaterialById(It.IsAny<int>())).ReturnsAsync(null as MaterialDTO);
@@ -207,5 +229,5 @@ namespace PhotoStudio.Test
             materials.Should().BeEquivalentTo(expectedMaterials);
         }
 
-    }    
+    }
 }

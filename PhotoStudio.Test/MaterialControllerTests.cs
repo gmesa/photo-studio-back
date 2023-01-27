@@ -109,55 +109,55 @@ namespace PhotoStudio.Test
             //Assert.IsType<NotFoundResult>(result);
         }
 
-        //[Fact]
-        //[Trait("UI", "Front")]
-        //public async void GetAllMaterials_ExpectedMaterials()
-        //{
+        [Fact]
+        [Trait("UI", "Front")]
+        public async void GetAllMaterials_ExpectedMaterials()
+        {
 
-        //    //arrange
-        //    var expectedMaterials = new List<MaterialDTO> { BuilderUtils.BuildMaterialDto() };
-        //    MaterialFixture.MockMaterialManager.Setup(mock => mock.GetMaterials()).ReturnsAsync(() => expectedMaterials);
+            //arrange
+            var expectedMaterials = new List<MaterialDTO> { BuilderUtils.BuildMaterialDto() };
+            MaterialFixture.MockMaterialManager.Setup(mock => mock.GetMaterials()).ReturnsAsync(() => expectedMaterials);
 
-        //    //actions
-        //    var result = await MaterialFixture.MaterialController.GetMaterials();
+            //actions
+            var result = await MaterialFixture.MaterialController.GetMaterials();
 
-        //    //asserts
-        //    var materials = (result as OkObjectResult)?.Value;
-        //    materials.Should().BeEquivalentTo(expectedMaterials, opt => opt.ComparingByMembers<MaterialDTO>());
-        //}
+            //asserts
+            var materials = (result as OkObjectResult)?.Value;
+            materials.Should().BeEquivalentTo(expectedMaterials, opt => opt.ComparingByMembers<MaterialDTO>());
+        }
 
-        //[Fact]
-        //[Trait("UI", "Front")]
-        //public async void AddMaterial_ReturnAddedMaterial()
-        //{
-        //    //arrange
-        //    var expectedMaterials = BuilderUtils.BuildMaterialDto();
-        //    MaterialFixture.MockMaterialManager.Setup(mock => mock.AddMaterial(It.IsAny<MaterialDTO>())).ReturnsAsync(() => expectedMaterials);
+        [Fact]
+        [Trait("UI", "Front")]
+        public async void AddMaterial_ReturnAddedMaterial()
+        {
+            //arrange
+            var expectedMaterials = BuilderUtils.BuildMaterialDto();
+            MaterialFixture.MockMaterialManager.Setup(mock => mock.AddMaterial(It.IsAny<MaterialDTO>())).ReturnsAsync(() => expectedMaterials);
 
-        //    //actions
-        //    var result = await MaterialFixture.MaterialController.AddMaterial(expectedMaterials);
+            //actions
+            var result = await MaterialFixture.MaterialController.AddMaterial(expectedMaterials);
 
-        //    //asserts
-        //    var materials = (result as CreatedAtActionResult)?.Value;
-        //    materials.Should().BeEquivalentTo(expectedMaterials, opt => opt.ComparingByMembers<MaterialDTO>().ExcludingMissingMembers());
-        //    result.Should().BeOfType<CreatedAtActionResult>();
-        //}
+            //asserts
+            var materials = (result as CreatedAtActionResult)?.Value;
+            materials.Should().BeEquivalentTo(expectedMaterials, opt => opt.ComparingByMembers<MaterialDTO>().ExcludingMissingMembers());
+            result.Should().BeOfType<CreatedAtActionResult>();
+        }
 
-        //[Fact]
-        //public async void UpdateMaterial_ReturnUpdatedMaterial()
-        //{
-        //    //arrange
-        //    var expectedMaterials = BuilderUtils.BuildMaterialDto();
-        //    MaterialFixture.MockMaterialManager.Setup(mock => mock.UpdateMaterial(It.IsAny<MaterialDTO>(), It.IsAny<int>())).ReturnsAsync(() => expectedMaterials);
+        [Fact]
+        public async void UpdateMaterial_ReturnUpdatedMaterial()
+        {
+            //arrange
+            var expectedMaterials = BuilderUtils.BuildMaterialDto();
+            MaterialFixture.MockMaterialManager.Setup(mock => mock.UpdateMaterial(It.IsAny<MaterialDTO>(), It.IsAny<int>())).ReturnsAsync(() => expectedMaterials);
 
-        //    //actions
-        //    var result = await MaterialFixture.MaterialController.UpdateMaterial(expectedMaterials, new Random().Next());
+            //actions
+            var result = await MaterialFixture.MaterialController.UpdateMaterial(expectedMaterials, 1002);
 
-        //    //asserts
-        //    var material = (result as OkObjectResult)?.Value as MaterialDTO;
-        //    material.Should().BeEquivalentTo(expectedMaterials, opt => opt.ComparingByMembers<MaterialDTO>().ExcludingMissingMembers());
-        //    result.Should().BeOfType<OkObjectResult>();
-        //}
+            //asserts
+            var material = (result as OkObjectResult)?.Value as MaterialDTO;
+            material.Should().BeEquivalentTo(expectedMaterials, opt => opt.ComparingByMembers<MaterialDTO>().ExcludingMissingMembers());
+            result.Should().BeOfType<OkObjectResult>();
+        }
 
         //[Fact]
         //[Trait("UI", "Back")]

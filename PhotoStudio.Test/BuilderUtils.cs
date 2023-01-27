@@ -16,7 +16,7 @@ namespace PhotoStudio.Test
         public static MaterialDTO BuildMaterialDto() { 
         
             MaterialDTO material = new MaterialDTO();
-            material.Id = -1;
+            material.Id = -1001;
             material.MaterialName = MATERIAL_NAME;
             
             return material;
@@ -26,7 +26,7 @@ namespace PhotoStudio.Test
         public static List<MaterialDTO> BuildListMaterialDto()
         {
             List<MaterialDTO> materials = new List<MaterialDTO> 
-            { new MaterialDTO() { Id = -1, MaterialName = MATERIAL_NAME }, 
+            { new MaterialDTO() { Id = -1, MaterialName = "Lienzo" }, 
               new MaterialDTO() { Id = -2, MaterialName = "PVC" }, 
               new MaterialDTO() { Id = -3, MaterialName = "Plastic" },
               new MaterialDTO() { Id = -4, MaterialName = "Cera" }};

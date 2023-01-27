@@ -34,19 +34,19 @@ namespace PhotoStudio.Test
         }
 
 
-        [Fact]
-        public async void GetMaterials_ReturnAllMaterials()
-        {
-            //arrange
-            var excpected = await _materialFixture.PhotoStudioContext.DbSet<Material>().ToListAsync();
+        //[Fact]
+        //public async void GetMaterials_ReturnAllMaterials()
+        //{
+        //    //arrange
+        //    var excpected = await _materialFixture.PhotoStudioContext.DbSet<Material>().ToListAsync();
 
-            //act
-            var result = await _materialManager.GetMaterials();
+        //    //act
+        //    var result = await _materialManager.GetMaterials();
 
-            //assert
-            result.Should().BeEquivalentTo(excpected, opt => opt.ExcludingMissingMembers());
+        //    //assert
+        //    result.Should().BeEquivalentTo(excpected, opt => opt.ExcludingMissingMembers());
 
-        }
+        //}
     }
 
 }

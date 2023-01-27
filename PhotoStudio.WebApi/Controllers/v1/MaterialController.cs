@@ -17,7 +17,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
     {
         private readonly IMaterialManager materialManager;
 
-        public MaterialController(IMaterialManager materialManager, IOptions<CustomExceptionHandlerOptions> options)
+        public MaterialController(IMaterialManager materialManager)
         {
             this.materialManager = materialManager;
         }
@@ -26,7 +26,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
         /// </summary>
         /// <returns></returns>
         [MapToApiVersion("1.0")]
-        [HttpGet, Route("material")]
+        [HttpGet, Route("")]
         [ProducesResponseType(typeof(List<MaterialDTO>), 200)]
         public async Task<IActionResult> GetMaterials()
         {
@@ -42,7 +42,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
         /// </summary>
         /// <param name="id">the material id</param>
         /// <returns></returns>
-        [HttpGet, Route("material/{id}", Name = "GetMaterialById")]
+        [HttpGet, Route("{id:int}", Name = "GetMaterialById")]
         [ProducesResponseType(typeof(MaterialDTO), 200)]
         public async Task<IActionResult> GetMaterialById(int id)
         {
@@ -58,7 +58,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
         /// </summary>
         /// <param name="material">The material data</param>
         /// <returns></returns>
-        [HttpPost, Route("material")]
+        [HttpPost, Route("")]
         [ProducesResponseType(typeof(MaterialDTO), 201)]
         public async Task<IActionResult> AddMaterial([FromBody] MaterialDTO material)
         {
@@ -83,7 +83,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
         /// <param name="material">update data</param>
         /// <param name="id">material id </param>
         /// <returns></returns>
-        [HttpPut, Route("material/{id}")]
+        [HttpPut, Route("{id}")]
         [ProducesResponseType(typeof(MaterialDTO), 200)]
         public async Task<IActionResult> UpdateMaterial([FromBody] MaterialDTO material, int id)
         {
@@ -97,7 +97,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
             if (result != null)
                 return Ok(result);
 
-            return BadRequest();
+            return NotFound();
 
         }
 
@@ -106,7 +106,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
         /// </summary>
         /// <param name="id">The material id to delete</param>
         /// <returns></returns>
-        [HttpDelete, Route("material/{id}")]
+        [HttpDelete, Route("{id}")]
         [ProducesResponseType(typeof(MaterialDTO), 200)]
         public async Task<IActionResult> DeleteMaterial(int id)
         {
@@ -114,6 +114,17 @@ namespace PhotoStudio.WebApi.Controllers.v1
             return Ok();
         }
 
+        [HttpGet, Route("{name}", Name = "GetMaterialsWithName")]
+        [ProducesResponseType(typeof(List<MaterialDTO>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetMaterialsWithName(string name)
+        {
+            var result = await materialManager.GetMaterialByTextName(name);
 
+            if(result == null)
+                return NotFound();
+            else 
+                return Ok(result);
+        }
+        
     }
 }

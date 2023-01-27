@@ -33,7 +33,7 @@ namespace PhotoStudio.WebApi.Extensions
 
             var info = new OpenApiInfo()
             {
-                Title = "Photo Studio Api dacumentaion",
+                Title = "Photo Studio Api documentaion",
                 Version = description.ApiVersion.ToString()
 
             };

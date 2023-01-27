@@ -26,7 +26,7 @@ namespace PhotoStudio.WebApi.Controllers.v2
         /// </summary>
         /// <returns></returns>
         [MapToApiVersion("2.0")]
-        [HttpGet, Route("material")]
+        [HttpGet, Route("")]
         [ProducesResponseType(typeof(List<MaterialDTO>), 200)]
         public async Task<IActionResult> GetMaterials()
         {
@@ -43,7 +43,7 @@ namespace PhotoStudio.WebApi.Controllers.v2
         /// <param name="id">the material id</param>
         /// <returns></returns>
         [MapToApiVersion("2.0")]
-        [HttpGet, Route("material/{id}", Name = "GetMaterialById")]
+        [HttpGet, Route("{id:int}", Name = "GetMaterialById")]
         [ProducesResponseType(typeof(MaterialDTO), 200)]
         public async Task<IActionResult> GetMaterialById(int id)
         {
@@ -60,7 +60,7 @@ namespace PhotoStudio.WebApi.Controllers.v2
         /// <param name="material">The material data</param>
         /// <returns></returns>
         [MapToApiVersion("2.0")]
-        [HttpPost, Route("material")]
+        [HttpPost, Route("")]
         [ProducesResponseType(typeof(MaterialDTO), 201)]
         public async Task<IActionResult> AddMaterial([FromBody] MaterialDTO material)
         {
@@ -86,7 +86,7 @@ namespace PhotoStudio.WebApi.Controllers.v2
         /// <param name="id">material id </param>
         /// <returns></returns>
         [MapToApiVersion("2.0")]
-        [HttpPut, Route("material/{id}")]
+        [HttpPut, Route("{id}")]
         [ProducesResponseType(typeof(MaterialDTO), 200)]
         public async Task<IActionResult> UpdateMaterial([FromBody] MaterialDTO material, int id)
         {
@@ -110,7 +110,7 @@ namespace PhotoStudio.WebApi.Controllers.v2
         /// <param name="id">The material id to delete</param>
         /// <returns></returns>
         [MapToApiVersion("2.0")]
-        [HttpDelete, Route("material/{id}")]
+        [HttpDelete, Route("{id}")]
         [ProducesResponseType(typeof(MaterialDTO), 200)]
         public async Task<IActionResult> DeleteMaterial(int id)
         {

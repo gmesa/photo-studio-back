@@ -76,24 +76,23 @@ namespace PhotoStudio.Test
 
 
 
-        //[Fact]
-        //[Trait("UI", "Front")]
-        //public async void GetMaterialById_ReturnMaterial()
-        //{
-        //    //arrange 
-        //    var expected = BuilderUtils.BuildMaterialDto();
-        //    MaterialFixture.MockMaterialManager.Setup(mock => mock.GetMaterialById(It.IsAny<int>())).ReturnsAsync(expected);
+        [Fact]
+       public async void GetMaterialById_ReturnMaterial()
+        {
+            //arrange 
+            var expected = BuilderUtils.BuildMaterialDto();
+            MaterialFixture.MockMaterialManager.Setup(mock => mock.GetMaterialById(It.IsAny<int>())).ReturnsAsync(expected);
 
 
-        //    //act
-        //    var result = await MaterialFixture.MaterialController.GetMaterialById(0);
+            //act
+            var result = await MaterialFixture.MaterialController.GetMaterialById(0);
 
-        //    //assert
-        //    var material = (result as OkObjectResult)?.Value;
-        //    material.Should().BeEquivalentTo(expected, opt => opt.ComparingByMembers<MaterialDTO>());
-        //    //Assert.IsType<MaterialDTO>(material);
-        //    //Assert.Equal(expected, material);
-        //}
+            //assert
+            var material = (result as OkObjectResult)?.Value;
+            material.Should().BeEquivalentTo(expected, opt => opt.ComparingByMembers<MaterialDTO>());
+            //Assert.IsType<MaterialDTO>(material);
+            //Assert.Equal(expected, material);
+        }
 
         //[Fact]
         //[Trait("UI", "Back")]

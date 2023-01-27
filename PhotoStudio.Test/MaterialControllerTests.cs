@@ -51,12 +51,15 @@ namespace PhotoStudio.Test
 
             PhotoStudioContext = new PhotoStudioContext(options);
 
-            PhotoStudioContext.Database.EnsureCreated();
+            //PhotoStudioContext.Database.EnsureCreated();
 
             var defaultMaterials = BuilderUtils.BuildListMaterialDto().Select((m) => new Material() { Id= m.Id, MaterialName = m.MaterialName, RowVersion = new byte[2]}).ToList();
 
-            PhotoStudioContext.DbSet<Material>().AddRange(defaultMaterials);
-            PhotoStudioContext.SaveChanges();
+            if (PhotoStudioContext.DbSet<Material>().Count() == 0)
+            {
+                PhotoStudioContext.DbSet<Material>().AddRange(defaultMaterials);
+                PhotoStudioContext.SaveChanges();
+            }
             return PhotoStudioContext;
         }
     }

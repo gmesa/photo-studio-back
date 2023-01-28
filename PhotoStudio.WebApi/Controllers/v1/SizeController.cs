@@ -5,18 +5,28 @@ using PhotoStudio.ServicesDTO;
 
 namespace PhotoStudio.WebApi.Controllers.v1
 {
+    /// <summary>
+    /// The controller for Size
+    /// </summary>
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class SizeController : ControllerBase
     {
         private readonly ISizeManager sizeManager;
 
+        /// <summary>
+        /// Initialized a new instance for <see cref="SizeController"/>
+        /// </summary>
+        /// <param name="sizeManager"></param>
         public SizeController(ISizeManager sizeManager)
         {
             this.sizeManager = sizeManager;
 
         }
-
+        /// <summary>
+        /// Get all sizes
+        /// </summary>
+        /// <returns></returns>
         [HttpGet, Route("")]
         [ProducesResponseType(typeof(List<SizeDTO>), 200)]
         public async Task<IActionResult> GetSizes()
@@ -27,7 +37,11 @@ namespace PhotoStudio.WebApi.Controllers.v1
 
             return BadRequest();
         }
-
+        /// <summary>
+        /// Get size by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet, Route("{id:int}", Name = "GetSizeById")]
         [ProducesResponseType(typeof(SizeDTO), 200)]
         public async Task<IActionResult> GetSizeById(int id)
@@ -39,6 +53,11 @@ namespace PhotoStudio.WebApi.Controllers.v1
             return NotFound();
         }
 
+        /// <summary>
+        ///Add size 
+        /// </summary>
+        /// <param name="size">Size data</param>
+        /// <returns></returns>
         [HttpPost, Route("")]
         [ProducesResponseType(typeof(SizeDTO), 201)]
         public async Task<IActionResult> AddSize([FromBody] SizeDTO size)
@@ -57,6 +76,12 @@ namespace PhotoStudio.WebApi.Controllers.v1
 
         }
 
+        /// <summary>
+        /// Update size
+        /// </summary>
+        /// <param name="size">Data size to update</param>
+        /// <param name="id">Id to update</param>
+        /// <returns></returns>
         [HttpPut, Route("{id:int}")]
         [ProducesResponseType(typeof(SizeDTO), 200)]
         public async Task<IActionResult> UpdateSize([FromBody] SizeDTO size, int id)
@@ -75,6 +100,11 @@ namespace PhotoStudio.WebApi.Controllers.v1
 
         }
 
+        /// <summary>
+        /// Delete size
+        /// </summary>
+        /// <param name="id">Id to delete</param>
+        /// <returns></returns>
         [HttpDelete, Route("{id:int}")]
         [ProducesResponseType(typeof(SizeDTO), 200)]
         public async Task<IActionResult> DeleteSize(int id)

@@ -100,8 +100,8 @@ var app = builder.Build();
 
 app.MapGet("/", (context) => Task.FromResult("Hello World!"));
 var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(options =>
@@ -114,7 +114,7 @@ if (app.Environment.IsDevelopment())
         }
 
     });
-}
+//}
 app.UseStaticFiles();
 app.UseMiddleware<GlobalExceptionHandler>();
 app.UseRouting();

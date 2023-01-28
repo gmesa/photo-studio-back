@@ -5,7 +5,7 @@ using PhotoStudio.ServicesDTO;
 
 namespace PhotoStudio.WebApi.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class PhotoBookController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
             this.photoBookManager = photoBookManager;
         }
 
-        [HttpGet, Route("photobook")]
+        [HttpGet, Route("")]
         [ProducesResponseType(typeof(List<PhotoBookDTO>), 200)]
         public async Task<IActionResult> GetPhotoBooks()
         {
@@ -28,7 +28,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
             return NotFound();
         }
 
-        [HttpGet, Route("photobook/{id}")]
+        [HttpGet, Route("{id}")]
         [ProducesResponseType(typeof(PhotoBookDTO), 200)]
         public async Task<IActionResult> GetPhotoBookById(int id)
         {
@@ -40,7 +40,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
             return NotFound();
         }
 
-        [HttpPost, Route("photoBook")]
+        [HttpPost, Route("")]
         [ProducesResponseType(typeof(PhotoBookDTO), 201)]
         public async Task<IActionResult> AddPhotoBook([FromBody] PhotoBookDTO photoBookDTO)
         {

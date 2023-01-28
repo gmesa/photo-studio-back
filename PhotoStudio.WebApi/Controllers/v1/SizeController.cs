@@ -5,7 +5,7 @@ using PhotoStudio.ServicesDTO;
 
 namespace PhotoStudio.WebApi.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class SizeController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
 
         }
 
-        [HttpGet, Route("size")]
+        [HttpGet, Route("")]
         [ProducesResponseType(typeof(List<SizeDTO>), 200)]
         public async Task<IActionResult> GetSizes()
         {
@@ -28,7 +28,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
             return BadRequest();
         }
 
-        [HttpGet, Route("size/{id}", Name = "GetSizeById")]
+        [HttpGet, Route("{id:int}", Name = "GetSizeById")]
         [ProducesResponseType(typeof(SizeDTO), 200)]
         public async Task<IActionResult> GetSizeById(int id)
         {
@@ -39,7 +39,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
             return NotFound();
         }
 
-        [HttpPost, Route("size")]
+        [HttpPost, Route("")]
         [ProducesResponseType(typeof(SizeDTO), 201)]
         public async Task<IActionResult> AddSize([FromBody] SizeDTO size)
         {
@@ -57,7 +57,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
 
         }
 
-        [HttpPut, Route("size/{id}")]
+        [HttpPut, Route("{id:int}")]
         [ProducesResponseType(typeof(SizeDTO), 200)]
         public async Task<IActionResult> UpdateSize([FromBody] SizeDTO size, int id)
         {
@@ -75,7 +75,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
 
         }
 
-        [HttpDelete, Route("size/{id}")]
+        [HttpDelete, Route("{id:int}")]
         [ProducesResponseType(typeof(SizeDTO), 200)]
         public async Task<IActionResult> DeleteSize(int id)
         {

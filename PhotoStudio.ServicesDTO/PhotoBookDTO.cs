@@ -8,6 +8,7 @@ namespace PhotoStudio.ServicesDTO
 {
     public class PhotoBookDTO
     {
+        public int Id { get; set; }
         public int MaterialId { get; set; }
         public int SizeId { get; set; }
         public decimal PortadaPrice { get; set; }

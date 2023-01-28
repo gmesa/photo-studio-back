@@ -91,6 +91,7 @@ builder.Services.AddDbContext<PhotoStudioContext>(options =>
 builder.Services
 .AddScoped<IMaterialManager, MaterialManager>()
 .AddScoped<ISizeManager, SizeManager>()
+.AddScoped<IPhotoBookManager, PhotoBookManager>()
 .AddTransient(typeof(ICommandRepository<>), typeof(CommandRepository<>))
 .AddTransient(typeof(IQueryRepository<>), typeof(QueryRepository<>));
 
@@ -114,6 +115,7 @@ if (app.Environment.IsDevelopment())
 
     });
 }
+app.UseStaticFiles();
 app.UseMiddleware<GlobalExceptionHandler>();
 app.UseRouting();
 app.UseCors("cors");

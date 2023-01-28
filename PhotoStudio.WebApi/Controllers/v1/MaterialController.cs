@@ -10,6 +10,9 @@ using PhotoStudio.ServicesDTO;
 
 namespace PhotoStudio.WebApi.Controllers.v1
 {
+    /// <summary>
+    /// The material controller
+    /// </summary>
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
@@ -17,12 +20,16 @@ namespace PhotoStudio.WebApi.Controllers.v1
     {
         private readonly IMaterialManager materialManager;
 
+        /// <summary>
+        /// Initilizes new instance for <see cref="MaterialController"/>
+        /// </summary>
+        /// <param name="materialManager">The manager for controller</param>
         public MaterialController(IMaterialManager materialManager)
         {
             this.materialManager = materialManager;
         }
         /// <summary>
-        /// Get al materials
+        /// Get all materials.
         /// </summary>
         /// <returns></returns>
         [MapToApiVersion("1.0")]
@@ -40,7 +47,7 @@ namespace PhotoStudio.WebApi.Controllers.v1
         /// <summary>
         /// Get material by id
         /// </summary>
-        /// <param name="id">the material id</param>
+        /// <param name="id">The material id</param>
         /// <returns></returns>
         [HttpGet, Route("{id:int}", Name = "GetMaterialById")]
         [ProducesResponseType(typeof(MaterialDTO), 200)]

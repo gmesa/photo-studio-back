@@ -45,10 +45,7 @@ namespace PhotoStudio.Application.Services
             var materials = await _qMaterialRepository.GetAll().ToListAsync();
 
             List<MaterialDTO> materialListDto = _mapper.Map<List<MaterialDTO>>(materials);
-
-            _logger.LogError("Get all materials");
-            _logger.LogCritical("Get all materials");
-            _logger.LogInformation("Get all materials");
+            _logger.LogError("Get all materials");           
 
             return materialListDto;
 

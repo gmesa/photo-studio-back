@@ -55,6 +55,7 @@ namespace PhotoStudio.Test
     public class MaterialFixture : IDisposable
     {
         public Mock<ILogger<MaterialController>> Logger { get; set; }
+        public Mock<ILogger<MaterialManager>> LoggerManager { get; set; }
         public Mock<IMaterialManager> MockMaterialManager { get; set; }
         public MaterialController MaterialController { get; set; }
 
@@ -64,6 +65,7 @@ namespace PhotoStudio.Test
         {
             MockMaterialManager = new Mock<IMaterialManager>();
             Logger = new Mock<ILogger<MaterialController>>();
+            LoggerManager = new Mock<ILogger<MaterialManager>>();
             MaterialController = new MaterialController(MockMaterialManager.Object);
             var mapConfig = new MapperConfiguration(mc => mc.AddProfile(new PhotoStudioMapperConfiguration()));
             Mapper = mapConfig.CreateMapper();

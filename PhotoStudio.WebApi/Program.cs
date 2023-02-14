@@ -9,19 +9,16 @@ using PhotoStudio.Infrastructure.Data;
 using PhotoStudio.Domain.Interfaces;
 using PhotoStudio.Application.Extensions;
 using FluentValidation.AspNetCore;
-using System.Reflection;
-using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation;
-using Microsoft.Extensions.Configuration;
 using PhotoStudio.WebApi.Extensions;
 using PhotoStudio.WebApi.Middlewares;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.DependencyInjection;
+
 using System.Text.Json.Serialization;
-using System.Text.Json;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using PhotoStudio.WebApi.Logs;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,10 +31,13 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
+builder.Host.ConfigureSerilog();
+builder.Services.AddLogging(logger => logger.AddSerilog());
+
 builder.Services.AddControllers(options =>
 {
     options.RespectBrowserAcceptHeader = true;
-})
+})   
 
 .AddJsonOptions(options =>
 {

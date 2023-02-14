@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PhotoStudio.Application.Interfaces;
 using PhotoStudio.Application.Mapper;
 using PhotoStudio.Application.Services;
@@ -26,13 +27,13 @@ namespace PhotoStudio.Test
         public readonly DBContextFixture _dBContextFixture;
 
 
-        public MaterialManagerTest(MaterialFixture materialFixture, DBContextFixture DBContextFixture)
+        public MaterialManagerTest(MaterialFixture materialFixture, DBContextFixture DBContextFixture, ILogger<MaterialManager> logger)
         {
             _dBContextFixture = DBContextFixture;
             _materialFixture = materialFixture;
             _qMaterialRepository = new QueryRepository<Material>(_dBContextFixture.PhotoStudioContext);
             _cMaterialRepository = new CommandRepository<Material>(_dBContextFixture.PhotoStudioContext);            
-            _materialManager = new MaterialManager(_cMaterialRepository, _qMaterialRepository, _materialFixture.Mapper);
+            _materialManager = new MaterialManager(_cMaterialRepository, _qMaterialRepository, _materialFixture.Mapper, logger);
         }
 
 

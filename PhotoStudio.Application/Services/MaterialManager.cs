@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PhotoStudio.Application.Interfaces;
 using PhotoStudio.Domain.Entities;
 using PhotoStudio.ServicesDTO;
@@ -27,13 +28,15 @@ namespace PhotoStudio.Application.Services
         private readonly ICommandRepository<Material> _cMaterialRepository;
         private readonly IQueryRepository<Material> _qMaterialRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<MaterialManager> _logger;
 
-        public MaterialManager(ICommandRepository<Material> cMaterialRepository, IQueryRepository<Material> qMaterialRepository, IMapper mapper)
+        public MaterialManager(ICommandRepository<Material> cMaterialRepository, IQueryRepository<Material> qMaterialRepository, IMapper mapper, ILogger<MaterialManager> logger)
         {
 
             _cMaterialRepository = cMaterialRepository;
             _qMaterialRepository = qMaterialRepository;
             _mapper = mapper;
+            _logger = logger;   
         }
 
         public async Task<List<MaterialDTO>> GetMaterials()
@@ -42,6 +45,10 @@ namespace PhotoStudio.Application.Services
             var materials = await _qMaterialRepository.GetAll().ToListAsync();
 
             List<MaterialDTO> materialListDto = _mapper.Map<List<MaterialDTO>>(materials);
+
+            _logger.LogError("Get all materials");
+            _logger.LogCritical("Get all materials");
+            _logger.LogInformation("Get all materials");
 
             return materialListDto;
 
